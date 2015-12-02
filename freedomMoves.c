@@ -51,5 +51,18 @@ void getMove(char board[ROW][COL], int row, int col){
     printf("%c   ", 65 + j);
   }
   printf("\n\n");
-  
+}
+
+int correctMoveForThePlayer(int oldRow, int oldCol, int *row, int *col){
+  int result = 0;
+  if(oldRow-1 == *row || oldRow == *row || oldRow+1 == *row){
+    if(oldCol-1 == *col){
+      result = 1;
+    } else if(oldCol == *col){
+      result = 1;
+    } else if(oldCol+1 == *col){
+      result = 1;
+    }
+  } 
+  return result;
 }

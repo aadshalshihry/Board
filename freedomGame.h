@@ -9,10 +9,6 @@
 
 #ifndef FREEDOM_GAME
 	#define FREEDOM_GAME
-	
-	
-
-
 
 	void getMove(char board[ROW][COL], int row, int col);
 	void playFreedomGame();
@@ -20,6 +16,8 @@
 	void printBoard(char board[ROW][COL]);
 	int rowCollection(char * str);
 	void fillArr(char arr[ROW][COL], char ch);
+	void getPlayerOne(char board[ROW][COL], int *row, int *col);
+	void getPlayerTwo(char board[ROW][COL], int *row, int *col);
 
 
 

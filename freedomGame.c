@@ -1,5 +1,6 @@
 #include "freedomGame.h"
 
+
 void fillArr(char arr[ROW][COL], char ch){
   int i, j;
   for(i = 0; i < ROW; i++){
@@ -10,11 +11,13 @@ void fillArr(char arr[ROW][COL], char ch){
   }
 }
 
+
 int rowCollection(char * str){
   int result;
   result = str[0];
   return result - 65;
 }
+
 
 void printBoard(char board[ROW][COL]){
   int i, j, side = ROW;
@@ -64,9 +67,50 @@ void getLocationForPlayers(char board[ROW][COL], int *row, int *col){
   *col = rowCollection(input);
 }
 
+void getPlayerOne(char board[ROW][COL], int *row, int *col){
+  int oldRow = *row, oldCol = *col;
+  while(1){
+    printf("Player 1:\n");
+
+    getLocationForPlayers(board, row, col);
+    printf("r:%d c:%d\n", *row, *col);
+
+    if(!correctMoveForThePlayer(oldRow, oldCol, row, col)){
+      printf("\nWRONG ENTRY. TRY AGAIN.\n");
+    } else if(*row < ROW && *col < COL){
+      board[*row][*col] = 'W';
+      getMove(board, *row, *col);
+      break;
+    } else {
+      printf("\nWRONG ENTRY. TRY AGAIN.\n");
+    }
+
+    
+  }
+}
 
 
+void getPlayerTwo(char board[ROW][COL], int *row, int *col){
+  int oldRow = *row, oldCol = *col;
+  while(1){
+    printf("Player 2:\n");
+    
+        printf("r:%d c:%d\n", *row, *col);
 
+    getLocationForPlayers(board, row, col);
+    printf("r:%d c:%d\n", *row, *col);
+
+    if(!correctMoveForThePlayer(oldRow, oldCol, row, col)){
+      printf("\nWRONG ENTRY. TRY AGAIN.\n");
+    } else if(*row < ROW && *col < COL){
+      board[*row][*col] = 'B';
+      getMove(board, *row, *col);
+      break;
+    } else {
+      printf("\nWRONG ENTRY. TRY AGAIN.\n");
+    }
+  }
+}
 
 
 void playFreedomGame(){
@@ -86,20 +130,9 @@ void playFreedomGame(){
   // 3. 
   int row = 0, col = 0, i = 0;
   while(i < (ROW)){
-
-    printf("Player 1:\n");
-    getLocationForPlayers(board, &row, &col);
-    printf("r:%d c:%d\n", row, col);
-
-    board[row][col] = 'W';
-    getMove(board, row, col);
-
-    printf("Player 2:\n");
-    getLocationForPlayers(board, &row, &col);
-    printf("r:%d c:%d\n", row, col);
-
-    board[row][col] = 'B';
-    getMove(board, row, col); 
+    getPlayerOne(board, &row, &col);
+    getPlayerTwo(board, &row, &col);
+    
 
     i++;
   }
