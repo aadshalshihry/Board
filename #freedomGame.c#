@@ -1,4 +1,13 @@
-#include "freedomGame.h"
+#include "freedomMoves.h"
+#include "freedomScoring.h"
+
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+
+#define ROW 2
+#define COL 2
 
 void fillArr(char arr[ROW][COL], char ch){
   int i, j;
@@ -28,7 +37,7 @@ void printBoard(char board[ROW][COL]){
       printf("%s", "----");
     }
     printf("-\n");
-
+    
     printf("%d  ", i);
     for(j = 0; j < COL; j++){
       printf("| %c ", board[i][j]);
@@ -64,12 +73,63 @@ void getLocationForPlayers(char board[ROW][COL], int *row, int *col){
   *col = rowCollection(input);
 }
 
+void getMove(char board[ROW][COL], int row, int col){
+  int i, j, side = ROW;
+  printf("\n\n");
+  for(i = ROW-1; i >= 0; i--){
+    
+    // print (-)
+    printf("   ");
+    for(j = 0; j < COL; j++){
+      printf("%s", "----");
+    }
+    printf("-\n");
+
+
+    printf("%d  ", i);
+    for(j = 0; j < COL; j++){
+      if(row == i && col == j){
+        printf("| %c ", board[i][j]);
+      } else if(board[i][j] != ' '){
+	printf("| %c ", board[i][j]);
+      } else if(row-1 == i || row == i || row+1 == i){
+        if(col-1 == j || col == j || col+1 == j){
+	  printf("| * ");
+        } else {
+	  printf("| %c ", board[i][j]);
+
+        }
+        
+      } else {
+        printf("| %c ", board[i][j]);
+
+      }
+    }
+    printf("|\n");
+  }
+  
+  // printf("   -----------------------------------------\n");
+  // print (-)
+  printf("   ");
+  for(j = 0; j < COL; j++){
+    printf("%s", "----");
+  }
+  printf("-\n");
+
+  // printf("     A   B   C   D   E   F   G   H   I   J\n\n\n");
+  // print ABC danimc
+  printf("     ");
+  for(j = 0; j < COL; j++){
+    printf("%c   ", 65 + j);
+  }
+  printf("\n\n");
+  
+}
 
 
 
 
-
-void playFreedomGame(){
+int main(int argc, char **argv){
 
   char board[ROW][COL] = {' '};
   
@@ -104,6 +164,10 @@ void playFreedomGame(){
     i++;
   }
 
+  
+
+  
+  return 0;
 }
 
 
