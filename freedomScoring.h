@@ -6,8 +6,8 @@
 #ifndef FREEDOM_SCORING
   #define FREEDOM_SCORING
 
-	#define ROW 5
-	#define COL 5
+	#define ROW 10
+	#define COL 10
 
 	int socreDiagonalRight(char board[ROW][COL], char ch, int indexRow, int indexCol);
 	int socreDiagonalRightHelper(char board[ROW][COL], char ch);
@@ -18,7 +18,7 @@
 	int scoreTopDown(char board[ROW][COL], char ch, int indexCol);
 	int scoreTopDownHelper(char board[ROW][COL], char ch);
 
-	int scoreLeftRight(char board[ROW][COL], char ch, int indexRow, int indexCol);
+	int scoreLeftRight(char board[ROW], char ch);
 	int scoreLeftRightHelper(char board[ROW][COL], char ch);
 
 

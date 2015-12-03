@@ -122,37 +122,29 @@ int scoreTopDownHelper(char board[ROW][COL], char ch){
 	for(j = 0; j < COL; j++){
 			result += scoreTopDown(board, ch, j);
 		}
-		
+
 	return result;
 }
 
-int scoreLeftRight(char board[ROW][COL], char ch, int indexRow, int indexCol){
-	int i, result = 0, count = 0;
-	if(board[indexRow][indexCol] == ch){
-		for(i = 0; i < ROW; i++){
-			if(indexRow < ROW && indexCol < COL){
-				if(board[indexRow][indexCol] == ch){
-					// printf("[%d][%d]: %c ", indexRow, indexCol, board[indexRow][indexCol]);
-					count++;
-				} else if(board[indexRow][indexCol] != ch){
-					// count = 0;
-					// printf("[-] Break\n");
-					break;
+int scoreLeftRight(char board[], char ch){
+	int j, result = 0, count = 0;
+	for(j = 0; j < COL; j++){
+		if(board[j] == ch){
+			count++;
+			if(j == COL-1){
+				if(count == 4){
+					result++;
 				}
 			}
+
+		} else {
 			
-			indexCol++;
-
+			if(count == 4){
+				result++;
+			} else {
+				count = 0;
+			}
 		}
-
-		if(count != 4){
-			return 0;
-		}
-
-		if(count == 4){
-			result++;
-		}
-
 	}
 	return result;
 }
@@ -160,11 +152,9 @@ int scoreLeftRight(char board[ROW][COL], char ch, int indexRow, int indexCol){
 
 int scoreLeftRightHelper(char board[ROW][COL], char ch){
 	int i , j , result = 0;
-	for(j = 0; j < COL; j++){
 		for(i = 0; i < ROW; i++){
-			result += scoreLeftRight(board, ch, i, j);
+			result += scoreLeftRight(board[i], ch);
 		}
-	}
 	return result;
 }
 
