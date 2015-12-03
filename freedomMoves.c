@@ -1,5 +1,7 @@
 #include "freedomMoves.h"
-#include "freedomGame.h"
+#include "freedomScoring.h"
+
+
 
 void getMove(char board[ROW][COL], int row, int col){
   int i, j, side = ROW;
@@ -66,3 +68,39 @@ int correctMoveForThePlayer(int oldRow, int oldCol, int *row, int *col){
   } 
   return result;
 }
+
+int isThereMove(char board[ROW][COL], int row, int col){
+
+
+    if(board[row-1][col-1] == ' ' && row-1 >= 0 && col-1 >= 0)
+      return 1;
+    
+    if(board[row-1][col] == ' ' && row-1 >= 0)
+      return 1;
+    
+    if(board[row-1][col+1] == ' ' && row-1 >= 0 && col+1 < COL)
+      return 1;
+    
+    if(board[row][col-1] == ' ' && col-1 >= 0)
+      return 1;
+    
+    if(board[row][col+1] == ' ' && col+1 < COL)
+      return 1;
+    
+    if(board[row+1][col-1] == ' ' && row+1 < ROW && col-1 >= 0 )
+      return 1;
+    
+    if(board[row+1][col] == ' ' && row+1 < ROW)
+      return 1;
+    
+    if(board[row+1][col+1] == ' ' && row+1 < ROW && col+1 < COL)
+      return 1;
+
+  return 0;
+}
+
+
+
+
+
+

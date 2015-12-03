@@ -1,12 +1,6 @@
 #include "freedomMoves.h"
 #include "freedomScoring.h"
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-
-
 #ifndef FREEDOM_GAME
 	#define FREEDOM_GAME
 
@@ -18,6 +12,12 @@
 	void fillArr(char arr[ROW][COL], char ch);
 	void getPlayerOne(char board[ROW][COL], int *row, int *col);
 	void getPlayerTwo(char board[ROW][COL], int *row, int *col);
+	int howManyEmptyLeft(char board[ROW][COL]);
+	int getScore(char board[ROW][COL], char ch);
+
+
+	
+
 
 
 

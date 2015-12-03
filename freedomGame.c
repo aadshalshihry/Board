@@ -1,4 +1,6 @@
 #include "freedomGame.h"
+#include "freedomScoring.h"
+
 
 
 void fillArr(char arr[ROW][COL], char ch){
@@ -113,31 +115,121 @@ void getPlayerTwo(char board[ROW][COL], int *row, int *col){
 }
 
 
+
+
 void playFreedomGame(){
 
-  char board[ROW][COL] = {' '};
   
-  fillArr(board, ' ');
+  char board[ROW][COL] = {
+
+    {'B', 'W', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'W'},
+
+    {'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'W'},
+
+    {'W', 'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B', 'B'},
+
+    {'B', 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'W', 'W'},
+
+    {'W', 'W', 'B', 'W', 'W', 'W', 'B', 'B', 'W', 'B'},
+
+    {'B', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'W'},
+
+    {'W', 'W', 'B', 'W', 'W', 'B', 'B', 'W', 'B', 'B'},
+
+    {'W', 'W', 'B', 'W', 'W', 'B', 'W', 'W', 'W', 'W'},
+
+    {'B', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B'},
+
+    {'W', 'B', 'W', 'W', 'B', 'B', 'W', 'W', 'W', 'B'}
+
+  };
+
+    
+
+
+  // char board[ROW][COL] = 
+  // {
+  //   {'W', 'W', 'B', 'B', 'B'},
+  //   {'W', 'B', 'W', 'B', 'B'},
+  //   {'W', 'B', 'W', 'W', 'B'},
+  //   {'W', 'B', 'W', 'W', 'B'},
+  //   {'B', 'B', 'W', 'W', 'B'}
+  // };
+
+  
+  
+  // char board[ROW][COL] = {' '};
+  // fillArr(board, ' ');
   
   
   printBoard(board);
   
-  // fill the array with information
 
-  // TODO:
-  // 1. make sure the to enter the right location
-  // 2. make it as funtion
-  // 3. 
   int row = 0, col = 0, i = 0;
-  while(i < (ROW)){
-    getPlayerOne(board, &row, &col);
-    getPlayerTwo(board, &row, &col);
-    
+  while(howManyEmptyLeft(board) != 0){
 
-    i++;
+    printf("Player 1:\n");
+
+    getLocationForPlayers(board, &row, &col);
+
+    board[row][col] = 'W';
+    getMove(board, row, col);
+
+
+    getPlayerTwo(board, &row, &col);
+
+    while(howManyEmptyLeft(board) != 0){
+      
+
+      getPlayerOne(board, &row, &col);
+      if(!isThereMove(board, row, col)){
+        break;
+      }
+
+      getPlayerTwo(board, &row, &col);
+      if(!isThereMove(board, row, col)){
+        break;
+      }
+
+      printf("%d\n", howManyEmptyLeft(board));
+      i++;
+    }
+
   }
 
+  // printf("Player One get W %d\n", getScore(board, 'W'));
+  // printf("Player Two get B %d\n", getScore(board, 'B'));
+
+  printf("LRW: %d\n", scoreLeftRightHelper(board, 'W'));
+  printf("LRB: %d\n", scoreLeftRightHelper(board, 'B'));
+
+  printf("TBW: %d\n", scoreTopDownHelper(board, 'W'));
+  printf("TBB: %d\n", scoreTopDownHelper(board, 'B'));
+
+
 }
+
+int howManyEmptyLeft(char board[ROW][COL]){
+  int result = 0, i , j;
+  for(i = 0; i < ROW; i++){
+    for(j = 0; j < COL; j++){
+      if(board[i][j] == ' '){
+        result++;
+      }
+    }
+  }
+  return result;
+}
+
+int getScore(char board[ROW][COL], char ch){
+  int result = 0;
+  result += socreDiagonalRightHelper(board, ch);
+  result += socreDiagonalLeftHelper(board, ch);
+  result += scoreTopDownHelper(board, ch);
+  result += scoreLeftRightHelper(board, ch);
+  return result;
+}
+
 
 
 
