@@ -13,7 +13,7 @@
 	void getPlayerOne(char board[ROW][COL], int *row, int *col);
 	void getPlayerTwo(char board[ROW][COL], int *row, int *col);
 	int howManyEmptyLeft(char board[ROW][COL]);
-	int getScore(char board[ROW][COL], char ch);
+	void printScore(char board[ROW][COL], char ch);
 
 
 	

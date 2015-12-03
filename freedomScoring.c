@@ -1,94 +1,61 @@
 #include "freedomScoring.h"
 
-int socreDiagonalRight(char board[ROW][COL], char ch, int indexRow, int indexCol){
-	// printf(" [+] socreDiagonalRight %c\n", board[indexRow][indexCol]);
-	int i, result = 0, count = 0;
-	if(board[indexRow][indexCol] == ch){
-		for(i = 0; i < ROW; i++){
-			if(indexRow < ROW && indexCol < COL){
-				if(board[indexRow][indexCol] == ch){
-					// printf("[%d][%d]: %c ", indexRow, indexCol, board[indexRow][indexCol]);
-					count++;
-				} else if(board[indexRow][indexCol] != ch){
-					// count = 0;
-					// printf("[-] Break\n");
-					break;
+int socreDiagonalRight(char board[ROW][COL], char ch){
+	int i, j, k, a,  result = 0, count = 0;
+
+	char temp[ROW][COL] = {' '};
+	copyArrayToArray(board, temp);
+
+	for(i = 0; i < ROW; i++){
+		for(j = 0; j < COL; j++){
+			for(count = 0, k = i, a = j; k < ROW || a < COL; k++, a++){
+				if(temp[k][a] == ch){
+					count++;					
+					temp[k][a] = '*';
+				} else {
+					if(count == 4){
+						result++;
+						count = 0;
+					}
+					count = 0; 
 				}
 			}
-			indexCol++;
-			indexRow++;
+			if(count == 4)
+				result++;	
 		}
-		if( count != 4){
-			// printf("count != 4 \n");
-			return 0;
-		}
-
-		if(count == 4){
-			result++;
-		}
-
 	}
-	// printf("Befer return %d\n", result);
 	return result;
 }
 
-int socreDiagonalRightHelper(char board[ROW][COL], char ch){
-	int i , j , result = 0;
+
+int socreDiagonalLeft(char board[ROW][COL], char ch){
+	int i, j, k, a,  result = 0, count = 0;
+
+	char temp[ROW][COL] = {' '};
+	copyArrayToArray(board, temp);
+
 	for(i = 0; i < ROW; i++){
-		for(j = 0; j < COL; j++){
-			result += socreDiagonalRight(board, ch, i, j);
-			// printf(" ==> %d\n" , result);
+		for(j = COL-1; j >= 0; j--){
+			for(count = 0, k = i, a = j; k < ROW && a >= 0; k++, a--){
+
+				if(temp[k][a] == ch){
+					count++;					
+					temp[k][a] = '*';
+				} else {
+					if(count == 4){
+						result++;
+						count = 0;
+					}
+					count = 0; 
+				}
+			}
+			if(count == 4)
+				result++;	
 		}
 		
 	}
-
-
-	return result;
-
-}
-
-int socreDiagonalLeft(char board[ROW][COL], char ch, int indexRow, int indexCol){
-	int i, result = 0, count = 0;
-	if(board[indexRow][indexCol] == ch){
-		for(i = 0; i < ROW; i++){
-			if(indexRow >= 0 && indexCol >= 0){
-				if(board[indexRow][indexCol] == ch){
-					// printf("[%d][%d]: %c ", indexRow, indexCol, board[indexRow][indexCol]);
-					count++;
-				} else if(board[indexRow][indexCol] != ch){
-					// count = 0;
-					// printf("[-] Break\n");
-					break;
-				}
-			}
-			indexCol--;
-			indexRow++;
-
-		}
-
-		if(count != 4){
-			return 0;
-		}
-
-		if(count == 4){
-			result++;
-		}
-
-	}
 	return result;
 }
-	
-int socreDiagonalLeftHelper(char board[ROW][COL], char ch){
-	int i , j , result = 0;
-	for(i = 0; i < ROW; i++){
-		for(j = COL-1; j >= 0; j--){
-			result += socreDiagonalLeft(board, ch, i, j);
-		}
-	}
-
-	return result;
-}
-
 
 
 int scoreTopDown(char board[ROW][COL], char ch, int indexCol){
@@ -156,6 +123,15 @@ int scoreLeftRightHelper(char board[ROW][COL], char ch){
 			result += scoreLeftRight(board[i], ch);
 		}
 	return result;
+}
+
+void copyArrayToArray(char board[ROW][COL], char temp[ROW][COL]){
+  int i, j;
+  for(i = 0; i < ROW; i++){
+    for(j = 0; j < COL; j++){
+      temp[i][j] = board[i][j];
+    }
+  }
 }
 
 

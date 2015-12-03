@@ -122,25 +122,26 @@ void playFreedomGame(){
   
   char board[ROW][COL] = {
 
-    {'B', 'W', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'W'},
 
-    {'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'W'},
-
-    {'W', 'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B', 'B'},
-
-    {'B', 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'W', 'W'},
-
-    {'W', 'W', 'B', 'W', 'W', 'W', 'B', 'B', 'W', 'B'},
-
-    {'B', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'W'},
-
-    {'W', 'W', 'B', 'W', 'W', 'B', 'B', 'W', 'B', 'B'},
-
-    {'W', 'W', 'B', 'W', 'W', 'B', 'W', 'W', 'W', 'W'},
+    {'W', 'B', 'W', 'W', 'B', 'B', 'W', 'W', 'W', 'B'},
 
     {'B', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B'},
 
-    {'W', 'B', 'W', 'W', 'B', 'B', 'W', 'W', 'W', 'B'}
+    {'W', 'W', 'B', 'W', 'W', 'B', 'W', 'W', 'W', 'W'},
+
+    {'W', 'W', 'B', 'W', 'W', 'B', 'B', 'W', 'B', 'B'},
+
+    {'B', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'W'},
+
+    {'W', 'W', 'B', 'W', 'W', 'W', 'B', 'B', 'W', 'B'},
+
+    {'B', 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'W', 'W'},
+
+    {'W', 'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B', 'B'},
+
+    {'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'W'},
+
+    {'B', 'W', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'W'}
 
   };
 
@@ -149,11 +150,11 @@ void playFreedomGame(){
 
   // char board[ROW][COL] = 
   // {
-  //   {'W', 'B', 'B', 'B', 'B'},
-  //   {'W', 'W', 'W', 'W', 'B'},
-  //   {'W', 'B', 'W', 'W', 'B'},
-  //   {'W', 'B', 'W', 'W', 'B'},
-  //   {'B', 'B', 'W', 'W', 'B'}
+  //   {'B', 'B', 'B', 'B', 'B'},
+  //   {'W', 'W', 'B', 'W', 'B'},
+  //   {'W', 'B', 'W', 'B', 'B'},
+  //   {'B', 'W', 'B', 'W', 'B'},
+  //   {'W', 'B', 'W', 'W', 'W'}
   // };
 
   
@@ -197,18 +198,11 @@ void playFreedomGame(){
 
   }
 
-  // printf("Player One get W %d\n", getScore(board, 'W'));
-  // printf("Player Two get B %d\n", getScore(board, 'B'));
+  printScore(board, 'W');
+  printScore(board, 'B');
 
-  // printf("LRW: %d\n", scoreLeftRightHelper(board, 'W'));
-  // printf("LRB: %d\n", scoreLeftRightHelper(board, 'B'));
+  
 
-  // printf("TBW: %d\n", scoreTopDownHelper(board, 'W'));
-  // printf("TBB: %d\n", scoreTopDownHelper(board, 'B'));
-
-  printf("DR W: %d\n", socreDiagonalRightHelper(board, 'W'));
-
-  printf("DL W: %d\n", socreDiagonalLeftHelper(board, 'W'));
 
 
 }
@@ -225,14 +219,21 @@ int howManyEmptyLeft(char board[ROW][COL]){
   return result;
 }
 
-int getScore(char board[ROW][COL], char ch){
-  int result = 0;
-  result += socreDiagonalRightHelper(board, ch);
-  result += socreDiagonalLeftHelper(board, ch);
-  result += scoreTopDownHelper(board, ch);
-  result += scoreLeftRightHelper(board, ch);
-  return result;
+void printScore(char board[ROW][COL], char ch){
+
+  printf("DR %c: %d\n",ch,  socreDiagonalLeft(board, ch));
+
+  printf("LR%c: %d\n",ch,  scoreLeftRightHelper(board, ch));
+
+  printf("TB%c: %d\n",ch,  scoreTopDownHelper(board, ch));
+
+  printf("DR %c: %d\n", ch, socreDiagonalRight(board, ch));
+
+  
+  
 }
+
+
 
 
 

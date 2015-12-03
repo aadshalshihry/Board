@@ -1,39 +1,29 @@
 #include "freedomGame.h"
 
-void printRow(int arr[]){
-	int j;
-	for(j = 0; j < 4; j++){
-		printf("%d ", arr[j]);
-	}
-	printf("\n");
-}
 
-void printCol(int arr[][4], int c){
-	int j;
-	for(j = 0; j < 4; j++){
-		printf("%d ", arr[j][c]);
-	}
-	printf("\n");
-}
 
 int main(){
 
-	// int arr[4][4] = {
-	// 	{1,2,3,4},
-	// 	{5,6,7,8},
-	// 	{9,10,11,12},
-	// 	{13,14,15,16}
-	// };
+	// char board[5][5] = 
+ //  {
+ //    {'B', 'B', 'B', 'B', 'W'},
+ //    {'W', 'W', 'B', 'W', 'B'},
+ //    {'W', 'B', 'W', 'B', 'B'},
+ //    {'B', 'W', 'B', 'W', 'B'},
+ //    {'W', 'B', 'W', 'W', 'W'}
+ //  };
 
-	// int i;
-	// for(i = 0; i < 4; i++){
-	// 	printRow(arr[i]);
+ //  int i, j, k , a;
+
+ //  for(i = 0; i < 5; i++){
+	// 	for(j = 4; j >= 0; j--){
+	// 		for(k = i, a = j; k < 5 && a >= 0; k++, a--){
+	// 			printf("%c ", board[k][a]);	
+	// 		}
+	// 		printf("\n");
+	// 	}
+		
 	// }
-
-	// for(i = 0; i < 4; i++){
-	// 	printCol(arr, i);
-	// }
-
 
 
 
